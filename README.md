@@ -60,7 +60,7 @@ Este projeto foi construído utilizando as seguintes tecnologias:
 
 ---
 
-## 🛣️ Endpoints Principais (Exemplos)
+## 🛣️ Endpoints Principais 
 
 | Método | Endpoint | Descrição |
 | :--- | :--- | :--- |
