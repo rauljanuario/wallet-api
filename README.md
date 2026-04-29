@@ -77,11 +77,4 @@ Este projeto foi construído utilizando as seguintes tecnologias:
 * **Segurança:** Implementação de autenticação *stateless* com JWT, garantindo que apenas utilizadores autorizados acedam aos seus próprios dados financeiros.
 
 ---
-
-## 🛠️ Próximas Melhorias
-- [ ] Documentação completa com Swagger/OpenAPI.
-- [ ] Implementação de Testes Unitários e de Integração (JUnit/Mockito).
-- [ ] Dockerização da aplicação para facilitar o deploy.
-
----
 Desenvolvido por [Raul Januario](www.linkedin.com/in/rauljanuario)
