@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS accounts (
+
+    id BIGSERIAL PRIMARY KEY,
+    holder_name VARCHAR(255) NOT NULL,
+    cpf CHAR(11) UNIQUE NOT NULL,
+    balance DECIMAL(19,2) NOT NULL DEFAULT 0.00
+
+);

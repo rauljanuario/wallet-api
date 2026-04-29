@@ -1,0 +1,1 @@
+ALTER TABLE transactions ALTER COLUMN sender_account_id DROP NOT NULL;
