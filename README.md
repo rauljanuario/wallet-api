@@ -64,9 +64,9 @@ Este projeto foi construído utilizando as seguintes tecnologias:
 
 | Método | Endpoint | Descrição |
 | :--- | :--- | :--- |
-| `POST` | `/api/auth/login` | Autentica e devolve o token JWT. |
-| `GET` | `/api/wallet/balance` | Consulta o saldo atual (Requer JWT). |
-| `POST` | `/api/transactions/transfer` | Realiza transferência para outro utilizador. |
+| `POST` | `/login` | Autentica e devolve o token JWT. |
+| `GET` | `/accounts/me/info` | Mostra informações do usuários. |
+| `POST` | `/transactions` | Realiza transferência para outro utilizador. |
 
 ---
 
