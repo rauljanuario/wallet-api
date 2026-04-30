@@ -2,6 +2,7 @@ package com.januario.wallet_api.models;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.SQLRestriction;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,6 +17,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@SQLRestriction("active = true")
 @EqualsAndHashCode(of = "id")
 public class Account implements UserDetails {
 
@@ -38,6 +40,9 @@ public class Account implements UserDetails {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private UserRole role;
+
+    @Column(nullable = false)
+    private boolean active = true;
 
 
     @Override
@@ -76,6 +81,6 @@ public class Account implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return this.active;
     }
 }

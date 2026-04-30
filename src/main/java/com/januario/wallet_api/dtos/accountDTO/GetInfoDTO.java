@@ -10,7 +10,8 @@ public record GetInfoDTO(
         String holderName,
         String cpf,
         BigDecimal balance,
-        UserRole role
+        UserRole role,
+        Boolean active
 
 ) {
 }

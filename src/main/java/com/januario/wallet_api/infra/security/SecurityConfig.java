@@ -27,6 +27,7 @@ public class SecurityConfig {
                     req.requestMatchers(HttpMethod.POST, "/accounts/create").permitAll();
                     req.requestMatchers(HttpMethod.POST, "/login").permitAll();
                     req.requestMatchers(HttpMethod.GET, "/accounts").hasRole("ADMIN");
+                    req.requestMatchers(HttpMethod.PUT, "/accounts/{id}").hasRole("ADMIN");
                     req.anyRequest().authenticated();
                 })
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)

@@ -66,16 +66,24 @@ public class AccountController {
                 account.getHolderName(),
                 account.getCpf(),
                 account.getBalance(),
-                account.getRole()
+                account.getRole(),
+                account.isActive()
 
         ));
 
     }
 
 
-    @DeleteMapping("/{id}")
+    @PutMapping("/{id}")
     public void deleteAccount (@PathVariable Long id){
-        accountRepository.deleteById(id);
+
+        Account account = accountRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Account not found"));
+
+        account.setActive(false);
+
+        accountRepository.save(account);
+
     }
 
 
