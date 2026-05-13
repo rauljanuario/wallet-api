@@ -20,10 +20,14 @@ import java.util.List;
 @RequestMapping("/transactions")
 public class TransactionController {
 
-    @Autowired
-    TransactionService transactionService;
-    @Autowired
-    private TransactionRepository transactionRepository;
+    private final TransactionService transactionService;
+    private final TransactionRepository transactionRepository;
+
+    public TransactionController(TransactionService transactionService, TransactionRepository transactionRepository){
+        this.transactionService = transactionService;
+        this.transactionRepository = transactionRepository;
+
+    }
 
     @PostMapping
     public ResponseEntity<TransactionResponseDTO> transfer(@RequestBody @Valid TransferDTO data){

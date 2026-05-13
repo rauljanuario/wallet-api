@@ -6,10 +6,8 @@ import com.januario.wallet_api.dtos.accountDTO.GetInfoDTO;
 import com.januario.wallet_api.dtos.accountDTO.PostAccountDTO;
 import com.januario.wallet_api.models.Account;
 import com.januario.wallet_api.repositories.AccountRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,11 +17,14 @@ import java.util.List;
 @RequestMapping("/accounts")
 public class AccountController {
 
-    @Autowired
-    private AccountRepository accountRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final AccountRepository accountRepository;
+    private final PasswordEncoder passwordEncoder;
+
+    public AccountController (AccountRepository accountRepository, PasswordEncoder passwordEncoder){
+        this.accountRepository = accountRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
 
     @PostMapping("/create")

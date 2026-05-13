@@ -9,7 +9,6 @@ import com.januario.wallet_api.models.TransactionType;
 import com.januario.wallet_api.repositories.AccountRepository;
 import com.januario.wallet_api.repositories.TransactionRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -18,11 +17,13 @@ import java.time.LocalDateTime;
 @Service
 public class TransactionService {
 
-    @Autowired
-    private TransactionRepository transactionRepository;
+    private final TransactionRepository transactionRepository;
+    private final AccountRepository accountRepository;
 
-    @Autowired
-    private AccountRepository accountRepository;
+    public TransactionService(TransactionRepository transactionRepository, AccountRepository accountRepository){
+        this.transactionRepository = transactionRepository;
+        this.accountRepository = accountRepository;
+    }
 
 
     @Transactional
