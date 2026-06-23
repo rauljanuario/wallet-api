@@ -14,7 +14,9 @@ Este projeto foi construído utilizando as seguintes tecnologias:
 * **Spring Security (JWT)**
 * **PostgreSQL**
 * **Maven**
-
+* **JUnit 5**
+* **Mockito**
+  
 ---
 
 ## 📋 Funcionalidades
@@ -26,6 +28,7 @@ Este projeto foi construído utilizando as seguintes tecnologias:
     * Transferências entre utilizadores com validação de saldo em tempo real.
     * Consulta de histórico/extrato.
 * **Segurança:** Proteção de rotas sensíveis via tokens JWT.
+* **Testes:** Verificação de endpoints.
 
 ---
 
