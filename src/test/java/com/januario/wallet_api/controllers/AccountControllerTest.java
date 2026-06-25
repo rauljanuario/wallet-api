@@ -18,6 +18,8 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -54,5 +56,46 @@ class AccountControllerTest {
         Assertions.assertNotNull(result.getBody());
         Assertions.assertEquals(dtoFict.holderName(), result.getBody().holderName());
 
+    }
+
+    @Test
+    @DisplayName("Return a accounts list")
+    void getAccount_WithValidData_ReturnAAccountList() {
+
+        // ARRANGE
+        Account dados = new Account();
+        dados.setHolderName("Raul");
+        dados.setId(1L);
+        dados.setRole(UserRole.ROLE_ADMIN);
+
+        List<Account> myAccount = List.of(dados);
+
+        Mockito.when(accountRepository.findAll()).thenReturn(myAccount);
+
+        // ACT
+        var result = accountController.getAccount();
+
+        // ASSERT
+        GetAccountDTO firstData = result.getFirst();
+
+        Assertions.assertNotNull(result);
+        Assertions.assertEquals(1, result.size());
+        Assertions.assertEquals(myAccount.getFirst().getHolderName(), firstData.holderName());
+        Assertions.assertEquals(myAccount.getFirst().getId(), firstData.id());
+        Assertions.assertEquals(myAccount.getFirst().getRole(), firstData.role());
+        Mockito.verify(accountRepository, Mockito.times(1)).findAll();
+
+    }
+
+    @Test
+    void getMyData() {
+    }
+
+    @Test
+    void getMyInfo() {
+    }
+
+    @Test
+    void deleteAccount() {
     }
 }
