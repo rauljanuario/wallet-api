@@ -88,7 +88,25 @@ class AccountControllerTest {
     }
 
     @Test
-    void getMyData() {
+    @DisplayName("Return specific account infos")
+    void getMyData_WithValidData_ReturnSpecificAccountInfos() {
+
+        // ARRANGE
+        Account newAccount = new Account();
+        newAccount.setId(1L);
+        newAccount.setHolderName("Raul");
+        newAccount.setRole(UserRole.ROLE_USER);
+
+        // ACT
+        var result = accountController.getMyData(newAccount);
+
+        // ASSERT
+        Assertions.assertNotNull(result);
+        Assertions.assertEquals(HttpStatus.OK, result.getStatusCode());
+        Assertions.assertEquals(newAccount.getHolderName(), result.getBody().holderName());
+        Assertions.assertEquals(newAccount.getId(), result.getBody().id());
+        Assertions.assertEquals(newAccount.getRole(), result.getBody().role());
+
     }
 
     @Test
