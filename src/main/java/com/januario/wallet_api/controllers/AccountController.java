@@ -52,14 +52,14 @@ public class AccountController {
     }
 
     @GetMapping("/me")
-    public ResponseEntity getMyData(@AuthenticationPrincipal Account account){
+    public ResponseEntity<GetAccountDTO> getMyData(@AuthenticationPrincipal Account account){
 
         return ResponseEntity.ok(new GetAccountDTO(account.getId(), account.getHolderName(), account.getRole()));
 
     }
 
     @GetMapping("/me/info")
-    public ResponseEntity getMyInfo(@AuthenticationPrincipal Account account){
+    public ResponseEntity<GetInfoDTO> getMyInfo(@AuthenticationPrincipal Account account){
 
         return ResponseEntity.ok(new GetInfoDTO(
 
