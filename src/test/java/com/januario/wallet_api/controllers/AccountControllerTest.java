@@ -20,6 +20,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -140,6 +141,23 @@ class AccountControllerTest {
     }
 
     @Test
-    void deleteAccount() {
+    @DisplayName("Return a false active")
+    void deleteAccount_WithValidData_ReturnFalseActive() {
+
+        // ARRANGE
+        Account newAccount = new Account();
+        newAccount.setId(1L);
+        newAccount.setActive(true);
+
+        Mockito.when(accountRepository.save(Mockito.any(Account.class))).thenReturn(newAccount);
+        Mockito.when(accountRepository.findById(newAccount.getId())).thenReturn(Optional.of(newAccount));
+
+        // ACT
+        accountController.deleteAccount(1L);
+
+        // ASSERT
+        Mockito.verify(accountRepository, Mockito.times(1)).save(newAccount);
+        Assertions.assertFalse(newAccount.isActive());
+
     }
 }
