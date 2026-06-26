@@ -18,6 +18,7 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -110,7 +111,32 @@ class AccountControllerTest {
     }
 
     @Test
-    void getMyInfo() {
+    @DisplayName("Return all account infos")
+    void getMyInfo_WithValidData_ReturnAllAccountInfos() {
+
+        // ARRANGE
+        Account newAccount = new Account();
+        newAccount.setHolderName("Raul");
+        newAccount.setId(1L);
+        newAccount.setCpf("11122233344");
+        newAccount.setActive(true);
+        newAccount.setRole(UserRole.ROLE_USER);
+        newAccount.setBalance(BigDecimal.valueOf(1000));
+
+        // ACT
+        var result = accountController.getMyInfo(newAccount);
+
+        //ASSET
+        Assertions.assertNotNull(result);
+        Assertions.assertEquals(HttpStatus.OK, result.getStatusCode());
+        Assertions.assertEquals(newAccount.getHolderName(), result.getBody().holderName());
+        Assertions.assertEquals(newAccount.getId(), result.getBody().id());
+        Assertions.assertEquals(newAccount.getCpf(), result.getBody().cpf());
+        Assertions.assertEquals(newAccount.isActive(), result.getBody().active());
+        Assertions.assertEquals(newAccount.getRole(), result.getBody().role());
+        Assertions.assertEquals(newAccount.getBalance(), result.getBody().balance());
+
+
     }
 
     @Test
