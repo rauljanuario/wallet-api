@@ -31,6 +31,10 @@ public class AccountController {
     @PostMapping("/create")
     public ResponseEntity<GetAccountDTO> createAccount (@RequestBody PostAccountDTO data) throws ErrorCreateAccount {
 
+        if (accountRepository.existsByCpf(data.cpf())){
+            throw new ErrorCreateAccount("This CPF already exists");
+        }
+
         var newAccount = new Account();
         newAccount.setHolderName(data.holderName());
         newAccount.setCpf(data.cpf());
@@ -38,12 +42,6 @@ public class AccountController {
 
         String hashPassword = passwordEncoder.encode(data.password());
         newAccount.setPassword(hashPassword);
-
-        boolean existsCpf = accountRepository.existsByCpf(data.cpf());
-
-        if (existsCpf){
-            throw new ErrorCreateAccount("This CPF already exists");
-        }
 
         accountRepository.save(newAccount);
 
