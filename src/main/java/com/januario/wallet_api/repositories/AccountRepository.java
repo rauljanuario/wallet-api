@@ -7,4 +7,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 public interface AccountRepository extends JpaRepository<Account, Long> {
 
     UserDetails findByCpf(String cpf);
+    boolean existsByCpf(String cpf);
+
 }
