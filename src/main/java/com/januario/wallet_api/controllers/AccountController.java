@@ -4,6 +4,7 @@ package com.januario.wallet_api.controllers;
 import com.januario.wallet_api.dtos.accountDTO.GetAccountDTO;
 import com.januario.wallet_api.dtos.accountDTO.GetInfoDTO;
 import com.januario.wallet_api.dtos.accountDTO.PostAccountDTO;
+import com.januario.wallet_api.exceptions.ErrorCreateAccount;
 import com.januario.wallet_api.models.Account;
 import com.januario.wallet_api.repositories.AccountRepository;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +29,7 @@ public class AccountController {
 
 
     @PostMapping("/create")
-    public ResponseEntity<GetAccountDTO> createAccount (@RequestBody PostAccountDTO data){
+    public ResponseEntity<GetAccountDTO> createAccount (@RequestBody PostAccountDTO data) throws ErrorCreateAccount {
 
         var newAccount = new Account();
         newAccount.setHolderName(data.holderName());
@@ -38,9 +39,18 @@ public class AccountController {
         String hashPassword = passwordEncoder.encode(data.password());
         newAccount.setPassword(hashPassword);
 
+        boolean existsCpf = accountRepository.existsByCpf(data.cpf());
+
+        if (existsCpf){
+            throw new ErrorCreateAccount("This CPF already exists");
+        }
+
         accountRepository.save(newAccount);
 
-        return ResponseEntity.ok(new GetAccountDTO(newAccount.getId(), newAccount.getHolderName(), data.role()));
+        return ResponseEntity.ok(
+                new GetAccountDTO(newAccount.getId(), newAccount.getHolderName(), data.role()
+                )
+        ) ;
 
     }
 
