@@ -7,6 +7,7 @@ import com.januario.wallet_api.dtos.accountDTO.PostAccountDTO;
 import com.januario.wallet_api.exceptions.ErrorCreateAccount;
 import com.januario.wallet_api.models.Account;
 import com.januario.wallet_api.repositories.AccountRepository;
+import com.januario.wallet_api.services.ControllerService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,35 +21,20 @@ public class AccountController {
 
 
     private final AccountRepository accountRepository;
-    private final PasswordEncoder passwordEncoder;
+    private final ControllerService controllerService;
 
-    public AccountController (AccountRepository accountRepository, PasswordEncoder passwordEncoder){
+    public AccountController (AccountRepository accountRepository, ControllerService controllerService){
         this.accountRepository = accountRepository;
-        this.passwordEncoder = passwordEncoder;
+        this.controllerService = controllerService;
     }
 
 
     @PostMapping("/create")
-    public ResponseEntity<GetAccountDTO> createAccount (@RequestBody PostAccountDTO data) throws ErrorCreateAccount {
+    public ResponseEntity<GetAccountDTO> account (@RequestBody PostAccountDTO data) throws ErrorCreateAccount {
 
-        if (accountRepository.existsByCpf(data.cpf())){
-            throw new ErrorCreateAccount("This CPF already exists");
-        }
+        GetAccountDTO result = controllerService.createAccount(data).getBody();
 
-        var newAccount = new Account();
-        newAccount.setHolderName(data.holderName());
-        newAccount.setCpf(data.cpf());
-        newAccount.setRole(data.role());
-
-        String hashPassword = passwordEncoder.encode(data.password());
-        newAccount.setPassword(hashPassword);
-
-        accountRepository.save(newAccount);
-
-        return ResponseEntity.ok(
-                new GetAccountDTO(newAccount.getId(), newAccount.getHolderName(), data.role()
-                )
-        ) ;
+        return ResponseEntity.ok(result);
 
     }
 
