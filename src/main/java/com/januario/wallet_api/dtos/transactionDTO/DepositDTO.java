@@ -5,5 +5,14 @@ import jakarta.validation.constraints.Positive;
 
 import java.math.BigDecimal;
 
-public record DepositDTO(@NotNull Long receiverAccountId, @NotNull @Positive BigDecimal value) {
+public record DepositDTO(
+
+        @NotNull
+        Long receiverAccountId,
+
+        @NotNull
+        @Positive
+        BigDecimal value
+
+) {
 }
