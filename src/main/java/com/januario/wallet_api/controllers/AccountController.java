@@ -30,7 +30,7 @@ public class AccountController {
 
 
     @PostMapping("/create")
-    public ResponseEntity<GetAccountDTO> account (@RequestBody PostAccountDTO data) throws ErrorCreateAccount {
+    public ResponseEntity<GetAccountDTO> account (@RequestBody PostAccountDTO data) {
 
         GetAccountDTO result = controllerService.createAccount(data).getBody();
 
