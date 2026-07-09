@@ -5,6 +5,7 @@ import com.januario.wallet_api.dtos.accountDTO.PostAccountDTO;
 import com.januario.wallet_api.models.Account;
 import com.januario.wallet_api.models.UserRole;
 import com.januario.wallet_api.repositories.AccountRepository;
+import com.januario.wallet_api.services.ControllerService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -34,29 +35,28 @@ class AccountControllerTest {
     private AccountRepository accountRepository;
 
     @Mock
-    private PasswordEncoder passwordEncoder;
+    private ControllerService controllerService;
 
 
     @Test
     @DisplayName("Return a new account")
-    void createAccount_WithValidData_ReturnAGetDTO() {
+    void account_WithValidData_ReturnAGetDTO() {
 
         // ARRANGE
-        PostAccountDTO dtoFict =
+        PostAccountDTO dtoFictEntry =
                 new PostAccountDTO("Raul", "11122233345", "raul123", UserRole.ROLE_ADMIN);
 
-        Account newAccount = new Account();
+        ResponseEntity<GetAccountDTO> dtoFictExit = ResponseEntity.ok(new GetAccountDTO(1L, "Raul", UserRole.ROLE_ADMIN));
 
-        Mockito.when(passwordEncoder.encode(dtoFict.password())).thenReturn("senhaMocada123");
-        Mockito.when(accountRepository.save(Mockito.any(Account.class))).thenReturn(newAccount);
+        Mockito.when(controllerService.createAccount(dtoFictEntry)).thenReturn(dtoFictExit);
 
         // ACT
-        var result = accountController.createAccount(dtoFict);
+        var result = accountController.account(dtoFictEntry);
 
         // ASSERT
         Assertions.assertEquals(HttpStatus.OK, result.getStatusCode());
         Assertions.assertNotNull(result.getBody());
-        Assertions.assertEquals(dtoFict.holderName(), result.getBody().holderName());
+        Assertions.assertEquals(dtoFictEntry.holderName(), result.getBody().holderName());
 
     }
 
