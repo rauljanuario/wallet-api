@@ -8,7 +8,7 @@ Uma API RESTful robusta desenvolvida para gerir carteiras digitais, permitindo o
 
 Este projeto foi construído utilizando as seguintes tecnologias:
 
-* **Java 17+**
+* **Java 25**
 * **Spring Boot 3**
 * **Spring Data JPA**
 * **Spring Security (JWT)**
