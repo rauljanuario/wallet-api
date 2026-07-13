@@ -71,12 +71,7 @@ public class AccountController {
     @PutMapping("/{id}")
     public void deleteAccount (@PathVariable Long id){
 
-        Account account = accountRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Account not found"));
-
-        account.setActive(false);
-
-        accountRepository.save(account);
+        controllerService.delete(id);
 
     }
 

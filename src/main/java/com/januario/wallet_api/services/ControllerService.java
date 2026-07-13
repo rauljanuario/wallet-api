@@ -42,7 +42,17 @@ public class ControllerService {
                 new GetAccountDTO(newAccount.getId(), newAccount.getHolderName(), data.role()
                 )
         ) ;
+    }
 
+    public void delete (Long id){
+
+        Account account = accountRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Account not found"));
+
+        account.setActive(false);
+
+        accountRepository.save(account);
 
     }
+
 }
