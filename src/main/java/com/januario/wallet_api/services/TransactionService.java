@@ -30,10 +30,10 @@ public class TransactionService {
     public TransactionResponseDTO executeTransfers (TransferDTO data){
 
         Account sender = accountRepository.findById(data.senderAccountId())
-                .orElseThrow(() -> new RuntimeException("Sender account not found"));
+                .orElseThrow(() -> new RuntimeException("Sender newAccount not found"));
 
         Account receiver = accountRepository.findById(data.receiverAccountId())
-                .orElseThrow(() -> new RuntimeException("Receiver account not found"));
+                .orElseThrow(() -> new RuntimeException("Receiver newAccount not found"));
 
         if (sender.getBalance().compareTo(data.value()) < 0){
             throw new RuntimeException("Insufficient balance to complete the transfer");
@@ -68,7 +68,7 @@ public class TransactionService {
     public Transaction executeDeposit (DepositDTO data){
 
         Account receiver = accountRepository.findById(data.receiverAccountId())
-                .orElseThrow(() -> new RuntimeException("Receiver account not found"));
+                .orElseThrow(() -> new RuntimeException("Receiver newAccount not found"));
 
         receiver.setBalance(receiver.getBalance().add(data.value()));
 

@@ -4,13 +4,11 @@ package com.januario.wallet_api.controllers;
 import com.januario.wallet_api.dtos.accountDTO.GetAccountDTO;
 import com.januario.wallet_api.dtos.accountDTO.GetInfoDTO;
 import com.januario.wallet_api.dtos.accountDTO.PostAccountDTO;
-import com.januario.wallet_api.exceptions.ErrorCreateAccount;
 import com.januario.wallet_api.models.Account;
 import com.januario.wallet_api.repositories.AccountRepository;
 import com.januario.wallet_api.services.ControllerService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,7 +29,7 @@ public class AccountController {
 
 
     @PostMapping("/create")
-    public ResponseEntity<GetAccountDTO> account (@RequestBody @Validated PostAccountDTO data) {
+    public ResponseEntity<GetAccountDTO> newAccount(@RequestBody @Validated PostAccountDTO data) {
 
         GetAccountDTO result = controllerService.createAccount(data).getBody();
 

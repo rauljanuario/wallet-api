@@ -22,13 +22,13 @@ public class AccountControllerIT {
 
 
     @Test
-    void createAccount_WithValidData_returnAGetDTO(){
+    void createNewAccount_WithValidData_returnAGetDTO(){
 
         PostAccountDTO dtoFict =
                 new PostAccountDTO("Raul", "11122233345", "raul123", UserRole.ROLE_ADMIN);
 
 
-        this.accountController.account(dtoFict);
+        this.accountController.newAccount(dtoFict);
 
         List<Account> accounts = this.accountRepository.findAll();
 

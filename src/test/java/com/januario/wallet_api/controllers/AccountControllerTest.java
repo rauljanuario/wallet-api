@@ -15,15 +15,11 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 class AccountControllerTest {
@@ -39,8 +35,8 @@ class AccountControllerTest {
 
 
     @Test
-    @DisplayName("Return a new account")
-    void account_WithValidData_ReturnAGetDTO() {
+    @DisplayName("Return a new newAccount")
+    void newAccount_WithValidData_ReturnAGetDTO() {
 
         // ARRANGE
         PostAccountDTO dtoFictEntry =
@@ -51,7 +47,7 @@ class AccountControllerTest {
         Mockito.when(controllerService.createAccount(dtoFictEntry)).thenReturn(dtoFictExit);
 
         // ACT
-        var result = accountController.account(dtoFictEntry);
+        var result = accountController.newAccount(dtoFictEntry);
 
         // ASSERT
         Assertions.assertEquals(HttpStatus.OK, result.getStatusCode());
@@ -62,7 +58,7 @@ class AccountControllerTest {
 
     @Test
     @DisplayName("Return a accounts list")
-    void getAccount_WithValidData_ReturnAAccountList() {
+    void getAccount_WithValidData_ReturnANewAccountList() {
 
         // ARRANGE
         Account dados = new Account();
@@ -90,8 +86,8 @@ class AccountControllerTest {
     }
 
     @Test
-    @DisplayName("Return specific account infos")
-    void getMyData_WithValidData_ReturnSpecificAccountInfos() {
+    @DisplayName("Return specific newAccount infos")
+    void getMyData_WithValidData_ReturnSpecificNewAccountInfos() {
 
         // ARRANGE
         Account newAccount = new Account();
@@ -112,8 +108,8 @@ class AccountControllerTest {
     }
 
     @Test
-    @DisplayName("Return all account infos")
-    void getMyInfo_WithValidData_ReturnAllAccountInfos() {
+    @DisplayName("Return all newAccount infos")
+    void getMyInfo_WithValidData_ReturnAllNewAccountInfos() {
 
         // ARRANGE
         Account newAccount = new Account();
@@ -142,7 +138,7 @@ class AccountControllerTest {
 
     @Test
     @DisplayName("Return a false active")
-    void deleteAccount_WithValidData_ReturnFalseActive() {
+    void deleteNewAccount_WithValidData_ReturnFalseActive() {
 
         // ARRANGE
         Account newAccount = new Account();
