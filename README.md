@@ -80,4 +80,4 @@ Este projeto foi construído utilizando as seguintes tecnologias:
 * **Segurança:** Implementação de autenticação *stateless* com JWT, garantindo que apenas usuários autorizados acessem seus próprios dados financeiros.
 
 ---
-Desenvolvido por [Raul Januario](www.linkedin.com/in/rauljanuario)
+Desenvolvido por [Raul Januario](https://www.linkedin.com/in/rauljanuario)
