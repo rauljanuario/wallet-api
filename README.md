@@ -1,6 +1,6 @@
 # 💰 Wallet API
 
-Uma API RESTful robusta desenvolvida para gerir carteiras digitais, permitindo o controlo de saldo, depósitos, levantamentos e transferências entre utilizadores de forma segura e eficiente.
+Uma API RESTful robusta desenvolvida para gerir carteiras digitais, permitindo o controle de saldo, depósitos, levantamentos e transferências entre utilizadores de forma segura e eficiente.
 
 ---
 
@@ -21,11 +21,11 @@ Este projeto foi construído utilizando as seguintes tecnologias:
 
 ## 📋 Funcionalidades
 
-* **Gestão de Utilizadores:** Registo e autenticação segura.
-* **Carteira Digital:** Criação automática de carteira associada ao utilizador.
+* **Gestão de Usuários:** Registo e autenticação segura.
+* **Carteira Digital:** Criação automática de carteira associada ao usuário.
 * **Transações:**
-    * Depósitos e levantamentos.
-    * Transferências entre utilizadores com validação de saldo em tempo real.
+    * Depósitos e transferências.
+    * Transferências entre usuários com validação de saldo em tempo real.
     * Consulta de histórico/extrato.
 * **Segurança:** Proteção de rotas sensíveis via tokens JWT.
 * **Testes:** Verificação de endpoints.
@@ -48,7 +48,7 @@ Este projeto foi construído utilizando as seguintes tecnologias:
     ```
 
 2.  **Configure o banco de dados:**
-    Edite o ficheiro `src/main/resources/application.properties` com as suas credenciais:
+    Edite o arquivo `src/main/resources/application.properties` com as suas credenciais:
     ```properties
     spring.datasource.url=jdbc:postgresql://localhost:5432/wallet_db
     spring.datasource.username=seu_utilizador
@@ -69,7 +69,7 @@ Este projeto foi construído utilizando as seguintes tecnologias:
 | :--- | :--- | :--- |
 | `POST` | `/login` | Autentica e devolve o token JWT. |
 | `GET` | `/accounts/me/info` | Mostra informações do usuários. |
-| `POST` | `/transactions` | Realiza transferência para outro utilizador. |
+| `POST` | `/transactions` | Realiza transferência para outro usuário. |
 
 ---
 
@@ -77,7 +77,7 @@ Este projeto foi construído utilizando as seguintes tecnologias:
 
 * **Integridade de Dados:** A lógica de transferência utiliza transações SQL para garantir que o dinheiro saia de uma conta e entre na outra de forma atómica.
 * **Arquitetura:** Organizado seguindo o padrão de camadas (Controller, Service, Repository), facilitando a manutenção e a criação de testes.
-* **Segurança:** Implementação de autenticação *stateless* com JWT, garantindo que apenas utilizadores autorizados acedam aos seus próprios dados financeiros.
+* **Segurança:** Implementação de autenticação *stateless* com JWT, garantindo que apenas usuários autorizados acessem seus próprios dados financeiros.
 
 ---
 Desenvolvido por [Raul Januario](www.linkedin.com/in/rauljanuario)
