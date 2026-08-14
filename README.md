@@ -16,6 +16,8 @@ Este projeto foi construído utilizando as seguintes tecnologias:
 * **Maven**
 * **JUnit 5**
 * **Mockito**
+* **Flyway**
+* **JaCoCo**
   
 ---
 
@@ -37,7 +39,7 @@ Este projeto foi construído utilizando as seguintes tecnologias:
 ### Pré-requisitos
 * JDK 17 ou superior
 * Maven instalado
-* PostgreSQL ativo (local ou via Docker)
+* PostgreSQL ativo (local)
 
 ### Passos para Instalação
 
