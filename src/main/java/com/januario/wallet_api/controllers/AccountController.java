@@ -29,7 +29,7 @@ public class AccountController {
 
 
     @PostMapping("/create")
-    public ResponseEntity<GetAccountDTO> newAccount(@RequestBody @Validated PostAccountDTO data) {
+    public ResponseEntity<GetAccountDTO> createAccount (@RequestBody @Validated PostAccountDTO data) {
 
         GetAccountDTO result = controllerService.createAccount(data).getBody();
 
@@ -38,21 +38,21 @@ public class AccountController {
     }
 
     @GetMapping
-    public List<GetAccountDTO> getAccount (){
+    public List<GetAccountDTO> getAllAccounts (){
         return accountRepository.findAll().stream()
                 .map(account -> new GetAccountDTO(account.getId(), account.getHolderName(), account.getRole()))
                 .toList();
     }
 
     @GetMapping("/me")
-    public ResponseEntity<GetAccountDTO> getMyData(@AuthenticationPrincipal Account account){
+    public ResponseEntity<GetAccountDTO> getSimpleInfoAccount (@AuthenticationPrincipal Account account){
 
         return ResponseEntity.ok(new GetAccountDTO(account.getId(), account.getHolderName(), account.getRole()));
 
     }
 
     @GetMapping("/me/info")
-    public ResponseEntity<GetInfoDTO> getMyInfo(@AuthenticationPrincipal Account account){
+    public ResponseEntity<GetInfoDTO> getCompleteInfoAccount (@AuthenticationPrincipal Account account){
 
         return ResponseEntity.ok(new GetInfoDTO(
 
