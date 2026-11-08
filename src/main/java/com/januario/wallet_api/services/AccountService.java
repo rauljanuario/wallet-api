@@ -11,12 +11,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @Service
-public class ControllerService {
+public class AccountService {
 
     private final AccountRepository accountRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public ControllerService (AccountRepository accountRepository, PasswordEncoder passwordEncoder){
+    public AccountService (AccountRepository accountRepository, PasswordEncoder passwordEncoder){
         this.accountRepository=accountRepository;
         this.passwordEncoder=passwordEncoder;
 
@@ -44,7 +44,7 @@ public class ControllerService {
         ) ;
     }
 
-    public void delete (Long id){
+    public void deleteAccount (Long id){
 
         Account account = accountRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Account not found"));

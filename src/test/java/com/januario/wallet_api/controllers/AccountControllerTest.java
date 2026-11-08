@@ -5,7 +5,7 @@ import com.januario.wallet_api.dtos.accountDTO.PostAccountDTO;
 import com.januario.wallet_api.models.Account;
 import com.januario.wallet_api.models.UserRole;
 import com.januario.wallet_api.repositories.AccountRepository;
-import com.januario.wallet_api.services.ControllerService;
+import com.januario.wallet_api.services.AccountService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -31,7 +31,7 @@ class AccountControllerTest {
     private AccountRepository accountRepository;
 
     @Mock
-    private ControllerService controllerService;
+    private AccountService accountService;
 
 
     @Test
@@ -44,10 +44,10 @@ class AccountControllerTest {
 
         ResponseEntity<GetAccountDTO> dtoFictExit = ResponseEntity.ok(new GetAccountDTO(1L, "Raul", UserRole.ROLE_ADMIN));
 
-        Mockito.when(controllerService.createAccount(dtoFictEntry)).thenReturn(dtoFictExit);
+        Mockito.when(accountService.createAccount(dtoFictEntry)).thenReturn(dtoFictExit);
 
         // ACT
-        var result = accountController.newAccount(dtoFictEntry);
+        var result = accountController.createAccount(dtoFictEntry);
 
         // ASSERT
         Assertions.assertEquals(HttpStatus.OK, result.getStatusCode());
@@ -71,7 +71,7 @@ class AccountControllerTest {
         Mockito.when(accountRepository.findAll()).thenReturn(myAccount);
 
         // ACT
-        var result = accountController.getAccount();
+        var result = accountController.getAllAccounts();
 
         // ASSERT
         GetAccountDTO firstData = result.getFirst();
@@ -96,7 +96,7 @@ class AccountControllerTest {
         newAccount.setRole(UserRole.ROLE_USER);
 
         // ACT
-        var result = accountController.getMyData(newAccount);
+        var result = accountController.getSimpleInfoAccount(newAccount);
 
         // ASSERT
         Assertions.assertNotNull(result);
@@ -121,7 +121,7 @@ class AccountControllerTest {
         newAccount.setBalance(BigDecimal.valueOf(1000));
 
         // ACT
-        var result = accountController.getMyInfo(newAccount);
+        var result = accountController.getCompleteInfoAccount(newAccount);
 
         //ASSET
         Assertions.assertNotNull(result);
