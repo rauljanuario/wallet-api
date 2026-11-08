@@ -1,9 +1,9 @@
 package com.januario.wallet_api.services;
 
-import com.januario.wallet_api.dtos.transactionDTO.DepositDTO;
+import com.januario.wallet_api.dtos.transactionDTO.PostDepositDTO;
 import com.januario.wallet_api.dtos.transactionDTO.TransactionResponseDTO;
 import com.januario.wallet_api.models.Transaction;
-import com.januario.wallet_api.dtos.transactionDTO.TransferDTO;
+import com.januario.wallet_api.dtos.transactionDTO.PostTransferDTO;
 import com.januario.wallet_api.models.Account;
 import com.januario.wallet_api.models.TransactionType;
 import com.januario.wallet_api.repositories.AccountRepository;
@@ -27,7 +27,7 @@ public class TransactionService {
 
 
     @Transactional
-    public TransactionResponseDTO executeTransfers (TransferDTO data){
+    public TransactionResponseDTO executeTransfers (PostTransferDTO data){
 
         Account sender = accountRepository.findById(data.senderAccountId())
                 .orElseThrow(() -> new RuntimeException("Sender newAccount not found"));
@@ -65,7 +65,7 @@ public class TransactionService {
     }
 
     @Transactional
-    public Transaction executeDeposit (DepositDTO data){
+    public Transaction executeDeposit (PostDepositDTO data){
 
         Account receiver = accountRepository.findById(data.receiverAccountId())
                 .orElseThrow(() -> new RuntimeException("Receiver newAccount not found"));

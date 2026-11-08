@@ -1,15 +1,14 @@
 package com.januario.wallet_api.controllers;
 
-import com.januario.wallet_api.dtos.transactionDTO.DepositDTO;
+import com.januario.wallet_api.dtos.transactionDTO.PostDepositDTO;
 import com.januario.wallet_api.dtos.transactionDTO.DepositResponseDTO;
 import com.januario.wallet_api.dtos.transactionDTO.TransactionResponseDTO;
-import com.januario.wallet_api.dtos.transactionDTO.TransferDTO;
+import com.januario.wallet_api.dtos.transactionDTO.PostTransferDTO;
 import com.januario.wallet_api.models.Account;
 import com.januario.wallet_api.models.Transaction;
 import com.januario.wallet_api.repositories.TransactionRepository;
 import com.januario.wallet_api.services.TransactionService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +29,7 @@ public class TransactionController {
     }
 
     @PostMapping
-    public ResponseEntity<TransactionResponseDTO> transfer(@RequestBody @Valid TransferDTO data){
+    public ResponseEntity<TransactionResponseDTO> transfer(@RequestBody @Valid PostTransferDTO data){
 
         TransactionResponseDTO result = transactionService.executeTransfers(data);
 
@@ -39,7 +38,7 @@ public class TransactionController {
     }
 
     @PostMapping("/deposit")
-    public ResponseEntity<DepositResponseDTO> deposit(@RequestBody @Valid DepositDTO data){
+    public ResponseEntity<DepositResponseDTO> deposit(@RequestBody @Valid PostDepositDTO data){
 
         Transaction result = transactionService.executeDeposit(data);
 
