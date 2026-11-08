@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import org.hibernate.validator.constraints.br.CPF;
 
-public record LoginDTO(
+public record PostLoginDTO(
 
         @NotBlank
         @CPF

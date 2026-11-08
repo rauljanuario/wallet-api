@@ -1,6 +1,6 @@
 package com.januario.wallet_api.controllers;
 
-import com.januario.wallet_api.dtos.accountDTO.LoginDTO;
+import com.januario.wallet_api.dtos.accountDTO.PostLoginDTO;
 import com.januario.wallet_api.dtos.accountDTO.LoginResponseDTO;
 import com.januario.wallet_api.models.Account;
 import com.januario.wallet_api.services.TokenService;
@@ -26,7 +26,7 @@ public class AuthController {
     }
 
     @PostMapping
-    public ResponseEntity login(@RequestBody @Valid LoginDTO data) {
+    public ResponseEntity login(@RequestBody @Valid PostLoginDTO data) {
 
         var authenticationToken = new UsernamePasswordAuthenticationToken(data.cpf(), data.password());
 
