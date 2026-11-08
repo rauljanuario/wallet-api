@@ -28,7 +28,8 @@ public class AccountControllerIT {
                 new PostAccountDTO("Raul", "11122233345", "raul123", UserRole.ROLE_ADMIN);
 
 
-        this.accountController.newAccount(dtoFict);
+
+        this.accountController.createAccount(dtoFict);
 
         List<Account> accounts = this.accountRepository.findAll();
 
