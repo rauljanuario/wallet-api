@@ -6,7 +6,7 @@ import com.januario.wallet_api.dtos.accountDTO.GetInfoDTO;
 import com.januario.wallet_api.dtos.accountDTO.PostAccountDTO;
 import com.januario.wallet_api.models.Account;
 import com.januario.wallet_api.repositories.AccountRepository;
-import com.januario.wallet_api.services.AccountService;
+import com.januario.wallet_api.services.ControllerService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
@@ -20,18 +20,18 @@ public class AccountController {
 
 
     private final AccountRepository accountRepository;
-    private final AccountService accountService;
+    private final ControllerService controllerService;
 
-    public AccountController (AccountRepository accountRepository, AccountService accountService){
+    public AccountController (AccountRepository accountRepository, ControllerService controllerService){
         this.accountRepository = accountRepository;
-        this.accountService = accountService;
+        this.controllerService = controllerService;
     }
 
 
     @PostMapping("/create")
     public ResponseEntity<GetAccountDTO> createAccount (@RequestBody @Validated PostAccountDTO data) {
 
-        GetAccountDTO result = accountService.createAccount(data).getBody();
+        GetAccountDTO result = controllerService.createAccount(data).getBody();
 
         return ResponseEntity.ok(result);
 
@@ -71,7 +71,7 @@ public class AccountController {
     @PutMapping("/{id}")
     public void deleteAccount (@PathVariable Long id){
 
-        accountService.deleteAccount(id);
+        controllerService.delete(id);
 
     }
 
