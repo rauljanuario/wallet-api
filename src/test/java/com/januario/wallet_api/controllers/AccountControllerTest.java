@@ -47,7 +47,7 @@ class AccountControllerTest {
         Mockito.when(controllerService.createAccount(dtoFictEntry)).thenReturn(dtoFictExit);
 
         // ACT
-        var result = accountController.newAccount(dtoFictEntry);
+        var result = accountController.createAccount(dtoFictEntry);
 
         // ASSERT
         Assertions.assertEquals(HttpStatus.OK, result.getStatusCode());
@@ -71,7 +71,7 @@ class AccountControllerTest {
         Mockito.when(accountRepository.findAll()).thenReturn(myAccount);
 
         // ACT
-        var result = accountController.getAccount();
+        var result = accountController.getAllAccounts();
 
         // ASSERT
         GetAccountDTO firstData = result.getFirst();
@@ -96,7 +96,7 @@ class AccountControllerTest {
         newAccount.setRole(UserRole.ROLE_USER);
 
         // ACT
-        var result = accountController.getMyData(newAccount);
+        var result = accountController.getSimpleInfoAccount(newAccount);
 
         // ASSERT
         Assertions.assertNotNull(result);
@@ -121,7 +121,7 @@ class AccountControllerTest {
         newAccount.setBalance(BigDecimal.valueOf(1000));
 
         // ACT
-        var result = accountController.getMyInfo(newAccount);
+        var result = accountController.getCompleteInfoAccount(newAccount);
 
         //ASSET
         Assertions.assertNotNull(result);
