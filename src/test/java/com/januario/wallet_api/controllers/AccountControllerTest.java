@@ -5,7 +5,7 @@ import com.januario.wallet_api.dtos.accountDTO.PostAccountDTO;
 import com.januario.wallet_api.models.Account;
 import com.januario.wallet_api.models.UserRole;
 import com.januario.wallet_api.repositories.AccountRepository;
-import com.januario.wallet_api.services.ControllerService;
+import com.januario.wallet_api.services.AccountService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -31,7 +31,7 @@ class AccountControllerTest {
     private AccountRepository accountRepository;
 
     @Mock
-    private ControllerService controllerService;
+    private AccountService accountService;
 
 
     @Test
@@ -44,7 +44,7 @@ class AccountControllerTest {
 
         ResponseEntity<GetAccountDTO> dtoFictExit = ResponseEntity.ok(new GetAccountDTO(1L, "Raul", UserRole.ROLE_ADMIN));
 
-        Mockito.when(controllerService.createAccount(dtoFictEntry)).thenReturn(dtoFictExit);
+        Mockito.when(accountService.createAccount(dtoFictEntry)).thenReturn(dtoFictExit);
 
         // ACT
         var result = accountController.createAccount(dtoFictEntry);
