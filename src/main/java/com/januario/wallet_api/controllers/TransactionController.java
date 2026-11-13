@@ -31,7 +31,7 @@ public class TransactionController {
     @PostMapping
     public ResponseEntity<TransactionResponseDTO> transfer(@RequestBody @Valid PostTransferDTO data){
 
-        TransactionResponseDTO result = transactionService.executeTransfers(data);
+        TransactionResponseDTO result = transactionService.executeTransfer(data);
 
         return ResponseEntity.ok(result);
 
