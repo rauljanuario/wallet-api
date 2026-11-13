@@ -89,7 +89,7 @@ public class TransactionService {
         transaction.setAmount(amount);
         transaction.setType(TransactionType.TRANSFER);
         transaction.setTimestamp(LocalDateTime.now());
-        return transactionRepository.save(transaction);
+        return transaction;
     }
 
     private TransactionResponseDTO convertToTransactionResponseDTO(Transaction transaction) {
