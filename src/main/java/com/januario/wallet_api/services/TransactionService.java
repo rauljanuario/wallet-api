@@ -48,20 +48,15 @@ public class TransactionService {
     @Transactional
     public Transaction executeDeposit (PostDepositDTO data){
 
-        Account receiver = accountRepository.findById(data.receiverAccountId())
-                .orElseThrow(() -> new RuntimeException("Receiver newAccount not found"));
+        Account receiver = findAccountById(data.receiverAccountId());
 
         receiver.setBalance(receiver.getBalance().add(data.value()));
 
         accountRepository.save(receiver);
 
-        var transaction = new Transaction();
-        transaction.setReceiverAccount(receiver);
-        transaction.setAmount(data.value());
-        transaction.setType(TransactionType.DEPOSIT);
-        transaction.setTimestamp(LocalDateTime.now());
+        Transaction deposit = createDeposit(receiver, data.value());
 
-        return transactionRepository.save(transaction);
+        return transactionRepository.save(deposit);
 
 
     }
@@ -101,5 +96,14 @@ public class TransactionService {
                 transaction.getType().toString(),
                 transaction.getTimestamp()
         );
+    }
+
+    private Transaction createDeposit(Account receiver, BigDecimal amount) {
+        var transaction = new Transaction();
+        transaction.setReceiverAccount(receiver);
+        transaction.setAmount(amount);
+        transaction.setType(TransactionType.DEPOSIT);
+        transaction.setTimestamp(LocalDateTime.now());
+        return transaction;
     }
 }
